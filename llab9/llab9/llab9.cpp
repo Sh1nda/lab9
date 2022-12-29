@@ -6,7 +6,7 @@
 using namespace std;
 
 
-void NewGraph(int** G, int n) {
+void adj(int** G, int n) {
 	for (int i = 0; i < n; i++) {
 		for (int j = 0; j < n; j++) {
 			if (i == j) {
@@ -20,7 +20,7 @@ void NewGraph(int** G, int n) {
 	}
 }
 
-void PrintGraph(int** G, int n) {
+void print_adj(int** G, int n) {
 	for (int i = 0; i < n; i++) {
 		for (int j = 0; j < n; j++) {
 			printf("%3d ", G[i][j]);
@@ -30,20 +30,20 @@ void PrintGraph(int** G, int n) {
 	printf("\n");
 }
 
-void BFSD(int s,int* dist, int** G, int n) {
+void BFSD(int v,int* dist, int** G, int n) {
 
 	queue <int> q;
-	q.push(s);
-	dist[s] = 0;
+	q.push(v);
+	dist[v] = 0;
 
 	while (!q.empty()) {
-		s = q.front();
+		v = q.front();
 		q.pop();
-		printf("%d ", s);
+		printf("%d ", v);
 		for (int i = 0; i < n; i++) {
-			if ((G[s][i] == 1) && dist[i] == -1) {
+			if ((G[v][i] == 1) && dist[i] == -1) {
 				q.push(i);
-				dist[i] = dist[s] + 1;
+				dist[i] = dist[v] + 1;
 			}
 		}
 	}
@@ -70,8 +70,8 @@ int main() {
 	dist = (int*)malloc(n * sizeof(int));
 
 
-	NewGraph(G, n);
-	PrintGraph(G, n);
+	adj(G, n);
+	print_adj(G, n);
 
 	for (j = 0; j < n; j++) {
 		for (i = 0; i < n; i++) {
